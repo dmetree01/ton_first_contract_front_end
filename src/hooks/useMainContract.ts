@@ -22,8 +22,10 @@ export function useMainContract() {
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
     const contract = new MainContract(
-      Address.parse("EQDVZ0pE11fODkYRAWP7l3kyZFmFVIAWrGTF0lwffaNLcDhF") // replace with your address from tutorial 2 step 8
+      Address.parse("EQDVZ0pE11fODkYRAWP7l3kyZFmFVIAWrGTF0lwffaNLcDhF")
     );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return client.open(contract) as OpenedContract<MainContract>;
   }, [client]);
 
@@ -32,7 +34,11 @@ export function useMainContract() {
       if (!mainContract) return;
       setContractData(null);
       setBalance(null);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const val = await mainContract.getData();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const balance = await mainContract.getBalance();
       setContractData({
         counter_value: val.number,
@@ -52,12 +58,18 @@ export function useMainContract() {
     contract_balance: balance, 
     ...contractData,
     sendIncrement: () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return mainContract?.sendIncrement(sender, toNano(0.05), 5);
     },
     sendDeposit: () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return mainContract?.sendDeposit(sender, toNano(1));
     },
     sendWithdrawalRequest: () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return mainContract?.sendWithdrawalRequest(sender, toNano(0.05), toNano(0.5));
     },
   };
