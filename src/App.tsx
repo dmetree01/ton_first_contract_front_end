@@ -18,10 +18,10 @@ function App() {
   const { connected } = useTonConnect();
   return (
     <div>
-      <div style={{display: "flex", justifyContent: "center"}}>
+      <div>
         <TonConnectButton />
       </div>
-      <div style={{display: "flex", textAlign: "left"}}>
+      <div style={{textAlign: "left"}}>
         <div className='Card'>
           <h3>Contract data</h3>
           <b>Our contract Address</b>
@@ -39,47 +39,51 @@ function App() {
           <b>Counter Value</b>
           <div>{counter_value ?? "Loading..."}</div>
         </div>
-        <div className='Card' style={{marginLeft: "50px"}}>
-          <h3>Contract actions</h3>
-          <div>Increment contract counter number by 1</div>
-          <div>
-            {connected && (
-              <button
-                onClick={() => {
-                  sendIncrement();
-                }}
-              >
-                Increment by 1
-              </button>
-            )}
-          </div>
-          <hr/><br/>
-          <div>Deposit contract balance by 1 TON</div>
-          <div>
-            {connected && (
-              <button
-                onClick={() => {
-                  sendDeposit();
-                }}
-              >
-                Request deposit of 1 TON
-              </button>
-            )}
-          </div>
-          <hr/><br/>
-          <div>Withdrawal from contract balance by 0.5 TON</div>
-          <div>
-            {connected && (
-              <button
-                onClick={() => {
-                  sendWithdrawalRequest();
-                }}
-              >
-                Request 0.5 TON withdrawal
-              </button>
-            )}
-          </div>
-        </div>
+        {
+          connected && (
+            <div className='Card'>
+              <h3>Contract actions</h3>
+              <div>Increment contract counter number by 1</div>
+              <div>
+                {connected && (
+                  <button
+                    onClick={() => {
+                      sendIncrement();
+                    }}
+                  >
+                    Increment by 1
+                  </button>
+                )}
+              </div>
+              <hr/><br/>
+              <div>Deposit contract balance by 1 TON</div>
+              <div>
+                {connected && (
+                  <button
+                    onClick={() => {
+                      sendDeposit();
+                    }}
+                  >
+                    Request deposit of 1 TON
+                  </button>
+                )}
+              </div>
+              <hr/><br/>
+              <div>Withdrawal from contract balance by 0.5 TON</div>
+              <div>
+                {connected && (
+                  <button
+                    onClick={() => {
+                      sendWithdrawalRequest();
+                    }}
+                  >
+                    Request 0.5 TON withdrawal
+                  </button>
+                )}
+              </div>
+            </div>
+          )
+      }
       </div>
     </div>
   );
